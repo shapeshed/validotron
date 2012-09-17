@@ -19,6 +19,20 @@ describe('When passing a validations object', function(done){
         done();
       })
     })
+    describe('and data is false with a custom message', function(done){
+      it('should populate the errors object', function(done){
+        var validation = new validotron({ 
+          name: { 
+            data: false, 
+            acceptance: {
+              message: "you need a name punk!"
+            } 
+          }
+        });
+        assert.strictEqual(JSON.stringify(validation.errors), "{\"name\":[\"you need a name punk!\"]}");
+        done();
+      })
+    })
     describe('and data is true', function(done){
       it('should not populate the errors object', function(done){
         var validation = new validotron({ 
@@ -44,6 +58,21 @@ describe('When passing a validations object', function(done){
           }
         });
         assert.strictEqual(JSON.stringify(validation.errors), "{\"name\":[\"is invalid\"]}");
+        done();
+      })
+    })
+    describe('and the regex does not match with a custom message', function(done){
+      it('should populate the errors object', function(done){
+        var validation = new validotron({ 
+          name: { 
+            data: "^%$#", 
+            format: {
+              with: "[A-Z]",
+              message: "the regex did not match"
+            } 
+          }
+        });
+        assert.strictEqual(JSON.stringify(validation.errors), "{\"name\":[\"the regex did not match\"]}");
         done();
       })
     })
@@ -77,6 +106,20 @@ describe('When passing a validations object', function(done){
         done();
       })
     })
+    describe('and data is undefined with a custom error message', function(done){
+      it('should populate the errors object', function(done){
+        var validation = new validotron({ 
+          name: { 
+            data: undefined, 
+            presence: {
+              message: "you need it punk!"
+            }
+          }
+        });
+        assert.strictEqual(JSON.stringify(validation.errors), "{\"name\":[\"you need it punk!\"]}");
+        done();
+      })
+    })
     describe('and data is defined', function(done){
       it('should not populate the errors object', function(done){
         var validation = new validotron({ 
@@ -100,6 +143,20 @@ describe('When passing a validations object', function(done){
           }
         });
         assert.strictEqual(JSON.stringify(validation.errors), "{\"name\":[\"is not a number\"]}");
+        done();
+      })
+    })
+    describe('and data is not a number with a custom error message', function(done){
+      it('should populate the errors object', function(done){
+        var validation = new validotron({ 
+          name: { 
+            data: undefined, 
+            numericality: {
+              message: "you want my number?"
+            }
+          }
+        });
+        assert.strictEqual(JSON.stringify(validation.errors), "{\"name\":[\"you want my number?\"]}");
         done();
       })
     })
