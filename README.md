@@ -2,9 +2,50 @@
 
 [![Build Status](https://secure.travis-ci.org/shapeshed/validotron.png)](http://travis-ci.org/shapeshed/validotron)
 
-Validator offers Rails-style validations on JavaScript objects or any data you throw at it.
+Throw data at validotron and it will tell you if it is valid based on what you specify. Inspired by Rails Validation Helpers. 
 
-    var validotron = require(validotron);
+## Installation
+
+    npm install validotron
+
+## Usage
+
+    var validotron = require('validotron');
+
+    var validation = new validotron({ 
+      name: { 
+        data: "%$£@", 
+        format: {
+          with:"[A-Z]",
+          message:"is the wrong format"
+        }
+      }, 
+      size: {
+        data: "big",
+        numericality: true
+      },
+      color: {
+        data: undefined,
+        presence: true
+      },
+      terms: {
+        data: 0,
+        acceptance: {
+          message: "you must accept to proceed"
+        }
+      }
+    });
+
+    console.log(validation.errors);
+
+    { name: [ 'is the wrong format' ],
+      size: [ 'is not a number' ],
+      color: [ 'can\'t be blank' ],
+      terms: [ 'you must accept to proceed' ] }
+
+You might choose to use it with Objects like this
+
+    var validotron = require('validotron');
 
     function Hat(name, size, colour, terms) {
       this.name = name || undefined;
@@ -46,46 +87,3 @@ Validator offers Rails-style validations on JavaScript objects or any data you t
       size: [ 'is not a number' ],
       color: [ 'can\'t be blank' ],
       terms: [ 'must be accepted' ] }
-
-## Installation
-
-    npm install validotron
-
-## Usage
-
-    var validotron = require('validotron');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
