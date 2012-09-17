@@ -45,7 +45,7 @@ Validator offers Rails-style validations on JavaScript objects or any data you t
     { name: [ 'is invalid' ],
       size: [ 'is not a number' ],
       color: [ 'can\'t be blank' ],
-      undefined: [ 'must be accepted' ] }
+      terms: [ 'must be accepted' ] }
 
 ## Installation
 
