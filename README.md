@@ -6,25 +6,21 @@
 
     npm install validotron
 
-## Usage
-
 ## Methods
 
 ### acceptance
 
 Validates that a checkbox on the user interface was checked when a form was submitted. This is typically used when the user needs to agree to your application’s terms of service, confirm reading some text, or any similar concept. 
 
-  var someData =  "0";
-  var validation = new validotron({ 
-    terms: { 
-      data: someData, 
-      acceptance: true
-    }, 
-  });
+    var someData =  "0";
+    var validation = new validotron({ 
+      terms: { 
+        data: someData, 
+        acceptance: true
+      }, 
+    });
 
 The default error message for this helper is "must be accepted".
-
-It can receive an :accept option, which determines the value that will be considered acceptance. It defaults to "1" and can be easily changed.
 
 It can receive an `accept:` option, which determines the value that will be considered acceptance. It defaults to "1" and can be easily changed.
 
