@@ -6,7 +6,7 @@
 
     npm install validotron
 
-## Methods
+## Usage
 
 ### acceptance
 
