@@ -2,6 +2,8 @@
 
 [![Build Status](https://secure.travis-ci.org/shapeshed/validotron.png)](http://travis-ci.org/shapeshed/validotron)
 
+Validotron is a partial JavaScript port of Ruby's [ActiveModel::Validations::ClassMethods][1]. It allows data to be validated against a series of constraints.
+
 ## Installation
 
     npm install validotron
@@ -63,16 +65,6 @@ This helper validates the length of a value. It provides a variety of options, s
       terms: { 
         data: someData, 
         length: {
-          in: [1..10]
-        }
-      }, 
-    });
-
-    var someData =  "foobar";
-    var validation = new validotron({ 
-      terms: { 
-        data: someData, 
-        length: {
           is: 6
         }
       }, 
@@ -82,34 +74,16 @@ The possible length constraint options are:
 
 * `minimum:` – The value cannot have less than the specified length.
 * `maximum:` – The value cannot have more than the specified length.
-* `in:` (or `within:`) – The value length must be included in a given interval. The value for this option must be a range.
 * `is:` – The value length must be equal to the given value.
-
-The default error messages depend on the type of length validation being performed. You can personalize these messages using the `wrong_length:`, `too_long:`, and `too_short:` options and `#{count}` as a placeholder for the number corresponding to the length constraint being used. You can still use the `message` option to specify an error message.
-
-    var someData =  "foobar";
-    var validation = new validotron({ 
-      terms: { 
-        data: someData, 
-        length: {
-          maxiumum: 1000,
-          too_long: "#{count} characters is the maximum allowed"; 
-        }
-      }, 
-    });
-
-Note that the default error messages are plural (e.g., "is too short (minimum is #{count} characters)"). For this reason, when :minimum is 1 you should provide a personalized message. When `in:` or `within:` have a lower limit of 1, you should either provide a personalized message or call presence prior to length.
-
-The size helper is an alias for length.
 
 ### format
 
 This helper validates a value by testing whether it matches a given regular expression, which is specified using the `with:` option
 
-    var someData =  "1234";
+    var someData =  "&^%$£";
     var validation = new validotron({ 
       name: { 
-        data: "^%$#", 
+        data: someData, 
         format: {
           with: "[A-Z]"
         } 
@@ -121,18 +95,10 @@ The default error message is "is invalid".
 
 This helper validates that a value has only numeric values. By default, it will match an optional sign followed by an integral or floating point number. To specify that only integral numbers are allowed set `only_integer:` to true.
 
-If you set `only_integer` to true, then it will use the
-
-    /\A[+-]?\d+\Z/
-
-regular expression to validate the attribute’s value. Otherwise, it will try to convert the value to a number using Float.
-
-Note that the regular expression above allows a trailing newline character.
-
     var someData =  "1234";
     var points = new validotron({ 
       name: { 
-        data: "^%$#", 
+        data: someData, 
         numericality: true
       }
     }
@@ -140,7 +106,7 @@ Note that the regular expression above allows a trailing newline character.
     var someData =  "1234";
     var points = new validotron({ 
       name: { 
-        data: "^%$#", 
+        data: "123.234", 
         numericality: {
           only_integer: true
         }
@@ -198,3 +164,5 @@ Returns an object containing all errors. Each key is the attribute name and the 
 ### errors[]
 
 errors[] is used when you want to check the error messages for a specific attribute. It returns an array of strings with all error messages for the given attribute, each string with one error message. If there are no errors related to the attribute, it returns an empty array.
+
+[1]: http://api.rubyonrails.org/classes/ActiveModel/Validations/ClassMethods.html
