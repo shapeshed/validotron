@@ -53,5 +53,18 @@ describe('length', function(done){
     assert.strictEqual(JSON.stringify(validation.errors), "{\"name\":[\"is the wrong length (should be 6 characters)\"]}");
     done();
   })
+  it('should pass validation if allow_blank: is true', function(done){
+    var validation = new validotron({ 
+      name: { 
+        data: "", 
+        length: {
+          minimum: 2,
+          allow_blank: true 
+        },
+      }
+    });
+    assert.strictEqual(test_helper.isEmpty(validation.errors), true);
+    done();
+  })
 })
 

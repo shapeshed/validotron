@@ -41,4 +41,16 @@ describe('format', function(done){
     assert.strictEqual(JSON.stringify(validation.errors), "{\"name\":[\"the regex did not match\"]}");
     done();
   })
+  it('should pass validation if allow_blank: is true', function(done){
+    var validation = new validotron({ 
+      name: { 
+        data: "", 
+        format: {
+          allow_blank: true 
+        },
+      }
+    });
+    assert.strictEqual(test_helper.isEmpty(validation.errors), true);
+    done();
+  })
 })

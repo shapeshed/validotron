@@ -138,6 +138,22 @@ The default error message is "can't be empty".
 
 ## Common Validation Options
 
+### allow_blank:
+
+This option will let validation pass if the value is blank, like nil or an empty string for example.
+
+    var validation = new validotron({ 
+      title: { 
+        data: "", 
+        length: {
+          is: 5,
+          allow_blank: true
+        }, 
+      }
+    });
+
+allow_blank: is ignored by the presence validator.
+
 ### message:
 
 As you've already seen, the `message:` option lets you specify the message that will be added to the errors collection when validation fails. When this option is not used, Validotron will use the respective default error message for each validation helper.  

@@ -59,5 +59,17 @@ describe('acceptance', function(done){
     assert.strictEqual(test_helper.isEmpty(validation.errors), true);
     done();
   })
+  it('should pass validation if allow_blank: is true', function(done){
+    var validation = new validotron({ 
+      name: { 
+        data: "", 
+        acceptance: {
+          allow_blank: true 
+        },
+      }
+    });
+    assert.strictEqual(test_helper.isEmpty(validation.errors), true);
+    done();
+  })
 })
 
