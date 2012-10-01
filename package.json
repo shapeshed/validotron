@@ -6,7 +6,7 @@
   ],
   "main": "./lib/validotron",
   "author": "George Ornbo <george@shapeshed.com> (http://shapeshed.com)",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "engines": {
     "node": "*"
   },
