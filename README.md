@@ -36,6 +36,60 @@ It can receive an `accept:` option, which determines the value that will be cons
       }, 
     });
 
+### exclusion
+
+This helper validates that a value is not included in a given array. 
+
+    var someData = 'www';
+    var validation = new validotron({ 
+      name: { 
+        data: someData, 
+        exclusion: {
+          in: ['www', 'us', 'ca', 'jp']
+        }
+      }
+    });
+
+The exclusion helper has an option :in that receives the set of values that will not be accepted for the validated attributes. 
+
+The default error message for this helper is "is reserved".
+
+### format
+
+This helper validates a value by testing whether it matches a given regular expression, which is specified using the `with:` option
+
+    var someData =  "&^%$£";
+    var validation = new validotron({ 
+      name: { 
+        data: someData, 
+        format: {
+          with: "[A-Z]"
+        } 
+      }
+    });
+
+The default error message is "is invalid".
+
+
+
+### inclusion
+
+This helper validates that the value is included in a given array. 
+
+    var someData =  "huge";
+    var validation = new validotron({ 
+      name: { 
+        data: someData, 
+        inclusion: {
+          in: ['small', 'medium', 'large']
+        } 
+      }
+    });
+
+The inclusion helper has an option :in that receives the set of values that will be accepted. 
+
+The default error message for this helper is "is not included in the list".
+
 ### length
 
 This helper validates the length of a value. It provides a variety of options, so you can specify length constraints in different ways:
@@ -76,21 +130,6 @@ The possible length constraint options are:
 * `maximum:` – The value cannot have more than the specified length.
 * `is:` – The value length must be equal to the given value.
 
-### format
-
-This helper validates a value by testing whether it matches a given regular expression, which is specified using the `with:` option
-
-    var someData =  "&^%$£";
-    var validation = new validotron({ 
-      name: { 
-        data: someData, 
-        format: {
-          with: "[A-Z]"
-        } 
-      }
-
-The default error message is "is invalid".
-
 ## numericality
 
 This helper validates that a value has only numeric values. By default, it will match an optional sign followed by an integral or floating point number. To specify that only integral numbers are allowed set `only_integer:` to true.
@@ -101,7 +140,7 @@ This helper validates that a value has only numeric values. By default, it will 
         data: someData, 
         numericality: true
       }
-    }
+    });
 
     var someData =  "1234";
     var points = new validotron({ 
@@ -111,7 +150,7 @@ This helper validates that a value has only numeric values. By default, it will 
           only_integer: true
         }
       }
-    }
+    });
 
 * `greater_than:` – Specifies the value must be greater than the supplied value. The default error message for this option is "must be greater than #{count}".
 * `greater_than_or_equal_to:` – Specifies the value must be greater than or equal to the supplied value. The default error message for this option is "must be greater than or equal to %{count}".
