@@ -52,8 +52,8 @@ describe('exclusion', function(done) {
       name: {
         data: '',
         exclusion: {
-          allow_blank: true,
-          in: ['bar', 'baz']
+          in: ['bar', 'baz'],
+          allow_blank: true
         }
       }
     });

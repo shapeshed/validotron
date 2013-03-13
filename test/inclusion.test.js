@@ -52,8 +52,8 @@ describe('inclusion', function(done) {
       name: {
         data: '',
         inclusion: {
-          allow_blank: true,
-          in: ['bar', 'baz']
+          in: ['bar', 'baz'],
+          allow_blank: true
         }
       }
     });
